@@ -1,0 +1,26 @@
+.test {
+    position: relative;
+
+    .user {
+        position: absolute;
+        right: 10px;
+        top: 100px;
+        font-size: 14px;
+        border: 1px solid #346c9c;
+        background: #346c9c;
+        padding: 30px 10px 50px;
+        border-radius: 25px;
+        color: #10aec2;
+    }
+    .test{
+        position: absolute;
+        right: 50px;
+        top: 150px;
+        margin-top: 10px;
+        color: #10aec2;
+        a{
+            text-decoration: none;
+            color: #10aec2;
+        }
+    }
+}

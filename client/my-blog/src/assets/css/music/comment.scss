@@ -1,0 +1,69 @@
+#comment {
+    display: flex;
+    flex-direction: column;
+
+    .comment {
+        margin-top: 50px;
+        width: 300px;
+
+        .comItem {
+            border-bottom: 1px dashed #7e2065;
+            padding: 4px;
+            margin-bottom: 7px;
+            display: flex;
+            justify-content: space-around;
+
+            .comImg {
+                width: 45px;
+                height: 45px;
+                border: 1px solid #a35c8f;
+                border-radius: 50%;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+
+                }
+            }
+
+            .comCont {
+                width: 220px;
+                font-size: 12px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .comUser {
+                    display: flex;
+
+                    .user {
+                        color: #a35c8f;
+                        flex: 0 0 auto;
+                        font-size: 14px;
+                    }
+                }
+
+                .comBottom {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .comTime {
+                        color: #a35c8f;
+                    }
+
+                    .zan {
+                        i {
+                            cursor: pointer;
+
+                            &:hover {
+                                color: #a35c8f;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}

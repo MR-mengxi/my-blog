@@ -1,0 +1,58 @@
+.login {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #92b3a5;
+    .container{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -300px;
+        margin-top: -175px;
+        width: 600px;
+        height: 350px;
+        border: 1px solid;
+        border-radius: 7px;
+        color: #fff;
+        background: #45b787;
+        #login{
+            font-size: 36px;
+            text-align: center;
+        }
+        .logCont{
+            text-align: center;
+            .userItem{
+                display: block;
+                margin-bottom: 10px;
+            }
+            input{
+                outline: none;
+                padding: 5px;
+                text-indent: 5px;
+                border-style: none;
+                border: 1px solid;
+                border-radius: 8px;
+            }
+            .logBut{
+                .btn{
+                    border: none;
+                    padding:5px 10px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+            }
+            .reg{
+                a{
+                    text-decoration: none;
+                    color: blue;
+                }
+            }
+        }
+    }
+
+}

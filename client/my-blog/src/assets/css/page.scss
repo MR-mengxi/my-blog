@@ -1,0 +1,39 @@
+.pageset {
+    position: absolute;
+    // left: 0;
+    // right: 0;
+    bottom: 55px;
+    margin: 0 auto;
+
+    .page-1 {
+        display: flex;
+        justify-content: center;
+
+        // width: 300px;
+        .pager {
+            width: 24px;
+            height: 24px;
+            text-align: center;
+            line-height: 24px;
+        }
+
+        .item {
+            border: 1px solid;
+            border-radius: 6px;
+            margin: 0 5px;
+            padding: 3px;
+            background: #eea2a4;
+            color: #fff;
+            cursor: pointer;
+
+            &:hover {
+                color: #eea2a4;
+                background: #fff;
+            }
+        }
+        .active{
+            color: #eea2a4;
+            background: #fff;
+        }
+    }
+}
