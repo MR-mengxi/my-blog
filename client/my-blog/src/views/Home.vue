@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <circle-com />
+    <!-- <circle-com /> -->
     <!-- <test /> -->
     <footer class="footer">
       <p>
@@ -27,7 +27,8 @@ export default {
 
 <style lang="scss">
 body {
-  background: #92b3a5;
+  // background: #92b3a5;
+  background: url("../assets/image/4.jpg") no-repeat center/100% fixed;
   margin: 0;
   // position: relative;
 }

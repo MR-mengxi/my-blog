@@ -6,14 +6,14 @@ module.exports = sequelize.define("Music", {
         type: DataTypes.STRING,
         allowNull: false
     },
-    image: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    audio: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
+    // image: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false
+    // },
+    // audio: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false
+    // },
     singer: {
         type: DataTypes.STRING,
         allowNull: false
@@ -27,7 +27,11 @@ module.exports = sequelize.define("Music", {
         allowNull: false
     },
     isLike: {
-        type: DataTypes.STRING,
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    lyric: {
+        type: DataTypes.TEXT,
         allowNull: false
     }
 }, {

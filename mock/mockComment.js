@@ -7,7 +7,7 @@ const result = Mock.mock({
         }
     ]
 }).datas;
-// 这里面有个坑，ArticleId这个东西需要和定义模型关系一起用
+// 这里面有个坑，ArticleId这个东西需要和定义模型关系一起用，把它们写入同一个文件中执行。
 
 // console.log(result);
 
