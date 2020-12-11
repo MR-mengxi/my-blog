@@ -32,7 +32,7 @@
 
 <script>
 import mucplay from "./mucplay";
-import comment from "./comment";
+import comment from "./musicComment";
 
 export default {
   data() {

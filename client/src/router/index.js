@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import Login from '../components/login/Login'
 import Register from '../components/login/Register'
 import Music from '../components/music'
+import Article from '../article'
+import Comment from '../comment'
 import store from "../store";
 
 Vue.use(VueRouter)
@@ -15,9 +17,9 @@ const routes = [
     component: Home
   },
   {
-    path:'/music',
-    name:"Music",
-    component:Music,
+    path: '/music',
+    name: "Music",
+    component: Music,
     // beforeEnter(to,from,next){
     //   if (store.state.loginUser.data) {
     //     //有用户
@@ -33,9 +35,19 @@ const routes = [
     component: Login
   },
   {
-    path:'/register',
-    name:'Register',
-    component:Register
+    path: '/register',
+    name: 'Register',
+    component: Register
+  },
+  {
+    path: '/article',
+    name: "Article",
+    component: Article
+  },
+  {
+    path: '/comment',
+    name: 'Comment',
+    component: Comment
   }
 ]
 

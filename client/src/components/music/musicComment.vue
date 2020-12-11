@@ -1,6 +1,6 @@
 <template>
-  <div id="comment">
-    <div class="comment">
+  <div id="music-comment">
+    <div class="music-comment">
       <div class="comItem">
         <div class="comImg">
           <img src="../../assets/image/song_1.jpg" alt="用户头像" />
