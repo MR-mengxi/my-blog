@@ -18,6 +18,32 @@ exports.addAdmin = async function (adminObj) {
     }
 }
 
+
+
+// 登录
+exports.login = async function (name, loginPwd) {
+    const result = await Admin.findOne({
+        where: {
+            name,
+            loginPwd
+        }
+    });
+    if (result && result.name === name) {
+        return result.toJSON();
+    }
+    return null;
+}
+
+
+// 查找管理员
+exports.getAdminById = async function (id) {
+    const result = await Admin.findByPk(id);
+    if (result) {
+        return result.toJSON();
+    }
+    return null;
+};
+
 // 测试是否添加成功
 // const admin = require("./services/adminServ");
 // const adminObj = admin.addAdmin().then((res) => {
