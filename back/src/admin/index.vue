@@ -2,7 +2,7 @@
   <div class="back">
     <div class="msg">
       <div class="logo">
-        <img src="../../assets/小楠.png" alt="" />
+        <img src="../assets/小楠.png" alt="" />
       </div>
       <div class="msg-list">
         <ul>
@@ -35,13 +35,13 @@ export default {
     return {
       menuList: [
         { id: 0, name: "My world", router: "Admin" },
-        { id: 1, name: "Small mood", router: "Article" },
+        { id: 1, name: "文章列表", router: "Article" },
         { id: 2, name: "文章", router: "ArticleInfo" },
-        { id: 3, name: "A letter", router: "Envelope" },
-        { id: 4, name: "New letter", router: "EnvelopeInfo" },
-        { id: 5, name: "Comment", router: "Comment" },
-        { id: 6, name: "Myself", router: "Myself" },
-        { id: 7, name: "Subscribe", router: "Setting" },
+        { id: 3, name: "评论列表", router: "Comment" },
+        { id: 4, name: "评论", router: "CommentInfo" },
+        { id: 5, name: "音乐", router: "Music" },
+        { id: 6, name: "音乐列表", router: "MusicInfo" },
+        { id: 7, name: "设置", router: "Setting" },
       ],
     };
   },

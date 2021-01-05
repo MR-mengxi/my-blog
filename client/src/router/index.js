@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Login from '../components/login/Login'
-import Register from '../components/login/Register'
+import Login from '../login'
 import Music from '../components/music'
 import Article from '../article'
+import ArticleInfo from '../article/info'
 import Comment from '../comment'
 import store from "../store";
 
@@ -35,14 +35,14 @@ const routes = [
     component: Login
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: Register
-  },
-  {
     path: '/article',
     name: "Article",
     component: Article
+  },
+  {
+    path:'/articleinfo/:id',
+    name:'ArticleInfo',
+    component:ArticleInfo
   },
   {
     path: '/comment',

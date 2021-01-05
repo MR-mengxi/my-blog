@@ -20,7 +20,7 @@ app.use(express.static(staticRoot));
 
 // 加入跨域中间件
 // cors中间件
-const whiteList = ["null", "http://localhost:5008"];
+// const whiteList = ["null", "http://localhost:5008","http://localhost:8080"];
 app.use(
     cors({
         origin(origin, callback) {
@@ -28,11 +28,12 @@ app.use(
                 callback(null, "*");
                 return;
             }
-            if (whiteList.includes(origin)) {
-                callback(null, origin);
-            } else {
-                callback(new Error("not allowed"));
-            }
+            // if (whiteList.includes(origin)) {
+            //     callback(null, origin);
+            // } else {
+            //     callback(new Error("not allowed"));
+            // }
+            callback(null, origin);
         },
         credentials: true,
     })
@@ -60,8 +61,9 @@ app.use(express.json());
 // 处理api的请求
 app.use("/api/article", require("./api/article"));
 // app.use("/api/comment", require("./api/comment"));
-// app.use("/api/music", require("./api/music"));
+app.use("/api/music", require("./api/music"));
 app.use("/api/admin", require("./api/admin"));
+app.use("/api/upload", require("./api/upload"));
 
 
 // 处理错误的中间件

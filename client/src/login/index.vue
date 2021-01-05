@@ -7,18 +7,14 @@
       </div>
       <div class="login-input">
         <p>
-          <input type="text" v-model="user.userName" placeholder="Name" />
+          <input type="text" v-model="userName" placeholder="Name" />
         </p>
         <p>
-          <input
-            type="password"
-            v-model="user.password"
-            placeholder="Password"
-          />
+          <input type="password" v-model="passWord" placeholder="Password" />
         </p>
       </div>
       <div class="login-btn">
-        <button class="btn">sign in</button>
+        <button class="btn" @click="login">sign in</button>
         <span class="register" @click="isCreate">sign up</span>
       </div>
     </div>
@@ -66,10 +62,10 @@ export default {
   data() {
     return {
       loginTitle: "Login",
-      user: {
-        userName: "",
-        password: "",
-      },
+
+      userName: "",
+      passWord: "",
+
       create: {},
       isShow: false,
       isAlert: false,
@@ -84,6 +80,17 @@ export default {
       // }
       // 这两个功能是一样的
       return (this.isShow = !this.isShow);
+    },
+    async login() {
+      const user = await this.$store.dispatch("login", {
+        loginId: this.userName,
+        loginPwd: this.passWord,
+      });
+      if (user) {
+        this.$router.push("/");
+      } else {
+        alert("账号密码错误");
+      }
     },
     register() {
       if (Object.keys(this.create).length != 3) {

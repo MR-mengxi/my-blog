@@ -24,13 +24,10 @@
 </template>
 
 <script>
-import circleCom from "./circleCom";
+import axios from 'axios';
 
 export default {
   name: "Home",
-  components: {
-    circleCom,
-  },
 };
 </script>
 
@@ -46,7 +43,7 @@ body {
     right: 0;
     top: 0;
     bottom: 0;
-    background: url("../assets/image/4.jpg") no-repeat center center/cover;
+    background: url("../assets/image/2.jpg") no-repeat center center/cover;
     .personal-message {
       position: absolute;
       left: 50%;

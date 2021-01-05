@@ -2,7 +2,7 @@
   <div class="article">
     <div class="title">将来要写的东西</div>
     <div class="container">
-      <div class="article-list">
+      <div class="article-list" v-for="article in articleList">
         <div class="article-time">时间格式</div>
         <ul class="article-info">
           <li>
@@ -12,28 +12,15 @@
               </div>
             </div>
             <div class="item-r">
-              <p>曾经，那也是我们不为人知的过去</p>
-              <p>61 LIKE / 1174 READ</p>
+              <router-link
+                :to="{ name: 'ArticleInfo', params: { id: article.id } }"
+                tag="p"
+                >{{ article.title }}</router-link
+              >
+              <p>{{ article.like }} LIKE / {{ article.read }} READ</p>
             </div>
             <span class="publish-time">2020年12月11号</span>
           </li>
-           <li>
-            <div class="item-l">
-              <div class="img">
-                <img src="../assets/image/6.jpg" alt="" />
-              </div>
-            </div>
-            <div class="item-r">
-              <p>曾经，那也是我们不为人知的过去</p>
-              <p>61 LIKE / 1174 READ</p>
-            </div>
-            <span class="publish-time">2020年12月11号</span>
-          </li>
-        </ul>
-      </div>
-       <div class="article-list">
-        <div class="article-time">时间格式</div>
-        <ul class="article-info">
           <li>
             <div class="item-l">
               <div class="img">
@@ -42,31 +29,7 @@
             </div>
             <div class="item-r">
               <p>曾经，那也是我们不为人知的过去</p>
-              <p>61 LIKE / 1174 READ</p>
-            </div>
-            <span class="publish-time">2020年12月11号</span>
-          </li>
-           <li>
-            <div class="item-l">
-              <div class="img">
-                <img src="../assets/image/6.jpg" alt="" />
-              </div>
-            </div>
-            <div class="item-r">
-              <p>曾经，那也是我们不为人知的过去</p>
-              <p>61 LIKE / 1174 READ</p>
-            </div>
-            <span class="publish-time">2020年12月11号</span>
-          </li>
-           <li>
-            <div class="item-l">
-              <div class="img">
-                <img src="../assets/image/6.jpg" alt="" />
-              </div>
-            </div>
-            <div class="item-r">
-              <p>曾经，那也是我们不为人知的过去</p>
-              <p>61 LIKE / 1174 READ</p>
+              <p>{{ article.like }} LIKE / 1174 READ</p>
             </div>
             <span class="publish-time">2020年12月11号</span>
           </li>
@@ -77,7 +40,22 @@
 </template>
 
 <script>
-export default {};
+import axios from "../axios/request";
+export default {
+  data() {
+    return {
+      articleList: [],
+    };
+  },
+  created() {
+    axios()
+      .get("/api/article")
+      .then((res) => {
+        const datas = res.data.data;
+        this.articleList = datas.datas;
+      });
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -100,6 +78,7 @@ export default {};
       margin: 0;
       list-style: none;
       li {
+        position: relative;
         display: flex;
         box-sizing: border-box;
         margin-left: 20px;
@@ -113,6 +92,7 @@ export default {};
             img {
               width: 100%;
               height: 100%;
+              border-radius: 7px;
             }
           }
         }
@@ -133,9 +113,10 @@ export default {};
           }
         }
         .publish-time {
-            font-size: 14px;
+          position: absolute;
+          right: 0;
+          font-size: 14px;
           color: #d2c6a3;
-          margin-left: 140px;
         }
       }
     }

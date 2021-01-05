@@ -3,6 +3,6 @@
       "NODE_ENV": "development"
     },
     "watch": ["*.js", "*.json"],
-    "ignore": ["package*.json", "nodemon.json", "node_modules", "public"]
+    "ignore": ["package*.json", "nodemon.json", "node_modules", "public","client"]
   }
   

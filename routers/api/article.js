@@ -4,10 +4,17 @@ const articleServ = require("../../services/articleServ");
 const { asyncHandler } = require("../getSendResult");
 
 // 获取所有文章的接口
-// router.get("/", asyncHandler(async (req, res) => {
+router.get("/", asyncHandler(async (req, res) => {
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 5;
+    return articleServ.getArticle(page, limit);
+})
+);
 
-// })
-// );
+// 获取一个文章的接口
+router.get("/:id", asyncHandler(async (req, res) => {
+    return await articleServ.getArticleById(req.params.id);
+}))
 
 // jsonp获取所有文章的接口
 // router.get("/", async (req, res) => {

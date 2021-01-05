@@ -9,6 +9,18 @@ module.exports = sequelize.define("Article", {
     content: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    like: {
+        type: DataTypes.INTEGER,
+        defaultValue:0
+    },
+    read: {
+        type: DataTypes.INTEGER,
+       defaultValue:0
+    },
+    imgUrl: {
+        type: DataTypes.STRING,
+        allowNull: false,
     }
 }, {
     createdAt: false,

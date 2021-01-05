@@ -5,30 +5,21 @@ const Admin = require("../models/Admin");
 // 添加管理员
 exports.addAdmin = async function (adminObj) {
     // 判断adminObj的各种属性是否合理，如果为空则添加一个超级管理员，如果不为空，则什么都不做。
-    if (!adminObj) {
-        adminObj = {
-            name: "也子",
-            loginPwd: "syezitop"
-        }
-        const ins = await Admin.create(adminObj);
-        return ins.toJSON();
-    }
-    else {
-        return;
-    }
+    const ins = await Admin.create(adminObj);
+    return ins.toJSON();
 }
 
 
 
 // 登录
-exports.login = async function (name, loginPwd) {
+exports.login = async function (loginId, loginPwd) {
     const result = await Admin.findOne({
         where: {
-            name,
+            loginId,
             loginPwd
         }
     });
-    if (result && result.name === name) {
+    if (result && result.loginId === loginId) {
         return result.toJSON();
     }
     return null;

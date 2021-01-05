@@ -1,5 +1,5 @@
 const musicList = [
-    {song:"丑八怪",singer:"薛之谦",album:"意外",duration:"253",isLike:true,lyric:`[00:05.70] 原唱：一支榴莲
+    {song:"海底",singer:"一支榴莲",album:"",duration:"253",isLike:true,lyric:`[00:05.70] 原唱：一支榴莲
 [00:06.45] 作曲 : PSROSIE
 [00:07.52] 作词 : PSROSIE
 [00:09.02] 翻唱：酩九

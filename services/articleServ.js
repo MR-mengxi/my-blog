@@ -1,4 +1,5 @@
 const Article = require("../models/Article");
+// const { Op } = require("sequelize");
 
 // 添加一个技术文章
 exports.addArticle = async function (articleObj) {
@@ -7,9 +8,29 @@ exports.addArticle = async function (articleObj) {
 }
 
 // 查询所有的文章
-exports.getArticle = async function () {
-    const result = await Article.findAll();
-    return JSON.parse(JSON.stringify(result));
+exports.getArticle = async function (page = 1, limit = 5) {
+    // 第一种查询方式
+    // const result = await Article.findAll({
+    //     offset: (page - 1) * limit,
+    //     limit: +limit
+    // });
+    // const total = await Article.count();
+    // const datas = JSON.parse(JSON.stringify(result));
+    // return {
+    //     total,
+    //     datas
+    // }
+
+    // 第二种查询方式
+    const result = await Article.findAndCountAll({
+        attributes: ["id", "title", "content", "like", "read", "imgUrl"],
+        offset: (page - 1) * limit,
+        limit: +limit,
+    });
+    return {
+        total: result.count,
+        datas: JSON.parse(JSON.stringify(result.rows))
+    }
 }
 
 // 根据id查询文章

@@ -6,7 +6,7 @@ const { asyncHandler } = require("../getSendResult");
 const jwt = require("../jwt");
 
 router.post("/login", asyncHandler(async (req, res) => {
-    const result = await adminServ.login(req.body.name, req.body.loginPwd);
+    const result = await adminServ.login(req.body.loginId, req.body.loginPwd);
     if (result) {
         let value = result.id;
         // value = crypto.encrypt(value.toString());
@@ -27,8 +27,8 @@ router.post("/login", asyncHandler(async (req, res) => {
 );
 
 // 这个接口有问题
-router.get("/whoami", asyncHandler(async (req, res) => {
-    return await adminServ.getAdminById(req.userId)
-}))
+// router.get("/whoami", asyncHandler(async (req, res) => {
+//     return await adminServ.getAdminById(req.userId)
+// }))
 
 module.exports = router;
