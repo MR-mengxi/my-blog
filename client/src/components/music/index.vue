@@ -22,7 +22,7 @@
       </div> -->
     </div>
     <div>
-      <mucplay />
+      <mucplay :music="musicList" v-if="musicList.length > 0" />
     </div>
     <div>
       <comment />
@@ -33,13 +33,21 @@
 <script>
 import mucplay from "./mucplay";
 import comment from "./musicComment";
+import request from "../../axios/request";
 export default {
   data() {
     return {
-      musicList: [
-        
-      ],
+      musicList: [],
+      lyric: "",
     };
+  },
+
+  created() {
+    const result = request()
+      .get("/api/music")
+      .then((resp) => {
+        this.musicList = resp.data.data;
+      });
   },
 
   components: {

@@ -9,6 +9,7 @@
         <router-link :to="{ name: 'Article' }">文章</router-link>
         <router-link :to="{ name: 'Comment' }">评论</router-link>
         <router-link :to="{ name: 'Music' }">音乐</router-link>
+        <a href="https://github.com/MR-mengxi/my-blog" target="_black">GitHub</a>
         <router-link :to="{ name: 'Login' }">登录</router-link>
       </div>
     </div>
@@ -24,7 +25,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   name: "Home",

@@ -59,10 +59,10 @@ app.use(express.json());
 
 
 // 处理api的请求
-app.use("/api/article", require("./api/article"));
-// app.use("/api/comment", require("./api/comment"));
-app.use("/api/music", require("./api/music"));
 app.use("/api/admin", require("./api/admin"));
+app.use("/api/article", require("./api/article"));
+app.use("/api/comment", require("./api/comment"));
+app.use("/api/music", require("./api/music"));
 app.use("/api/upload", require("./api/upload"));
 
 

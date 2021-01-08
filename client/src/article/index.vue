@@ -49,10 +49,11 @@ export default {
   },
   created() {
     axios()
-      .get("/api/article")
+      .get("/api/article?page=1&limit=20")
       .then((res) => {
         const datas = res.data.data;
         this.articleList = datas.datas;
+        // console.log(this.articleList);
       });
   },
 };
