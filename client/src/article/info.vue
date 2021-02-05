@@ -9,16 +9,16 @@
         <span>评论 28</span>
         <span>喜欢 {{ contentInfo.like }}</span>
       </div>
-      <div class="content markdown-body">
+      <!-- <div class="content markdown-body">
         <div v-html="content"></div>
-      </div>
+      </div> -->
     </section>
   </div>
 </template>
 
 <script>
 import axios from "../axios/request";
-import marked from "marked";
+// import marked from "marked";
 
 export default {
   data() {
@@ -28,28 +28,28 @@ export default {
     };
   },
   methods: {
-    markdownRender() {
-      marked.setOptions({
-        renderer: new marked.Renderer(),
-        pedantic: false,
-        gfm: true,
-        tables: true,
-        breaks: false,
-        sanitize: false,
-        smartLists: true,
-        smartypants: false,
-        xhtml: false,
-      });
-      const html = marked(this.contentInfo.content);
-      this.content = html;
-    },
+    // markdownRender() {
+    //   marked.setOptions({
+    //     renderer: new marked.Renderer(),
+    //     pedantic: false,
+    //     gfm: true,
+    //     tables: true,
+    //     breaks: false,
+    //     sanitize: false,
+    //     smartLists: true,
+    //     smartypants: false,
+    //     xhtml: false,
+    //   });
+    //   const html = marked(this.contentInfo.content);
+    //   this.content = html;
+    // },
   },
   async created() {
     const id = this.$route.params.id;
     // 从远程获取详情页的信息
     const result = await axios().get(`/api/article/${id}`);
     this.contentInfo = result.data.data;
-    this.markdownRender();
+    // this.markdownRender();
   },
 };
 </script>

@@ -40,14 +40,19 @@ const routes = [
     component: Article
   },
   {
-    path:'/articleinfo/:id',
-    name:'ArticleInfo',
-    component:ArticleInfo
+    path: '/articleinfo/:id',
+    name: 'ArticleInfo',
+    component: ArticleInfo
   },
   {
     path: '/comment',
     name: 'Comment',
     component: Comment
+  },
+  {
+    path: '/scroll',
+    name: 'Scroll',
+    component: () => import('../components/scrollBar')
   }
 ]
 

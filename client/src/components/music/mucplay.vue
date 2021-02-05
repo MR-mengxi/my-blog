@@ -13,7 +13,11 @@
       </ul>
     </div>
     <div class="music-progress">
-      <audio ref="audio" src="../../assets/image/song_1.mp3"></audio>
+      <audio
+        ref="audio"
+        @timeupdate="setCurrent"
+        src="../../assets/image/梦里花.mp3"
+      ></audio>
       <div class="play">
         <i
           :class="['iconfont', isPlay ? 'icon-zantingtingzhi' : 'icon-1']"
@@ -22,8 +26,8 @@
         <!-- <i class="iconfont icon-zantingtingzhi"></i> -->
       </div>
       <div class="progress-bar">
-        <div class="bar-move"></div>
-        <div class="bar-circle"></div>
+        <div class="bar-move" ref="barMove"></div>
+        <!-- <div class="bar-circle" ref="barCircle"></div> -->
       </div>
       <div class="progress-time">
         <span>04:39</span>
@@ -40,27 +44,32 @@ export default {
       isPlay: false,
       lrcContainerHeight: 220,
       liHeight: 35,
+      musicTime: 253,
+      length: 462,
     };
   },
   methods: {
     play() {
       // 控制播放图标按钮切换
+      let audio = this.$refs.audio;
       if (!this.isPlay) {
-        this.$refs.audio.play();
+        audio.play();
         this.isPlay = true;
       } else {
-        this.$refs.audio.pause();
+        audio.pause();
         this.isPlay = false;
       }
-      this.setCurrent();
     },
     getCurrentIndex() {
       const audio = this.$refs.audio;
+      // console.log(audio);
       // 根据播放器的播放时间，从lyricList数组中得到对应的下标
       let playTime = audio.currentTime;
+      // console.log(playTime);
       for (let i = this.lyricList.length - 1; i >= 0; i--) {
         // 倒着循环
         const lrcObj = this.lyricList[i];
+        // console.log(lrcObj);
         if (playTime >= lrcObj.time) {
           return i; // 返回下标，结束循环
         }
@@ -69,11 +78,12 @@ export default {
     },
     setCurrent() {
       let index = this.getCurrentIndex(); // 得到当前播放的歌词是数组的第几项(下标)
+      const that = this;
+      let ul = this.$refs.ul;
       setULMarginTop();
       setLiActive();
+
       // 设置ul元素的margin-top
-      let that = this;
-      const ul = this.$refs.ul;
       function setULMarginTop() {
         let midHeight = that.lrcContainerHeight / 2 - that.liHeight / 2;
         let top = midHeight - index * that.liHeight;
@@ -96,13 +106,17 @@ export default {
           ul.children[index].className = "active";
         }
       }
+
+      let currentTime = this.$refs.audio.currentTime;
+      let currentLength = (currentTime / this.musicTime) * this.length;
+      this.$refs.barMove.style.width = currentLength + "px";
     },
   },
 
   computed: {
     lyricList() {
-      // console.log(this.music[0].lyric);
-      const lrc = this.music[0].lyric;
+      // const lrc = this.music[1].lyric;
+      const lrc = this.music;
       let parts = lrc.split("\n");
       for (let i = 0; i < parts.length; i++) {
         const str = parts[i]; // 拿到这一行的字符串

@@ -1,60 +1,84 @@
 <template>
   <div class="article">
-    <div class="title">将来要写的东西</div>
-    <div class="container">
-      <div class="article-list" v-for="article in articleList">
-        <div class="article-time">时间格式</div>
-        <ul class="article-info">
-          <li>
-            <div class="item-l">
-              <div class="img">
-                <img src="../assets/image/6.jpg" alt="" />
+    <!-- <Loading v-if="isLoading" /> -->
+    <template>
+      <div class="title">将来要写的东西</div>
+      <div class="container">
+        <div class="article-list" v-for="(article, index) in articleList">
+          <div class="article-time">时间格式</div>
+          <ul class="article-info">
+            <li>
+              <div class="item-l">
+                <div class="img">
+                  <img src="../assets/image/6.jpg" alt="" />
+                </div>
               </div>
-            </div>
-            <div class="item-r">
-              <router-link
-                :to="{ name: 'ArticleInfo', params: { id: article.id } }"
-                tag="p"
-                >{{ article.title }}</router-link
-              >
-              <p>{{ article.like }} LIKE / {{ article.read }} READ</p>
-            </div>
-            <span class="publish-time">2020年12月11号</span>
-          </li>
-          <li>
-            <div class="item-l">
-              <div class="img">
-                <img src="../assets/image/6.jpg" alt="" />
+              <div class="item-r" ref="titleWidth">
+                <router-link
+                  @click.native="read($event, index, article.read)"
+                  :to="{ name: 'ArticleInfo', params: { id: article.id } }"
+                  tag="p"
+                  >{{ article.title }}</router-link
+                >
+                <p>{{ article.like }} LIKE / {{ article.read }} READ</p>
               </div>
-            </div>
-            <div class="item-r">
-              <p>曾经，那也是我们不为人知的过去</p>
-              <p>{{ article.like }} LIKE / 1174 READ</p>
-            </div>
-            <span class="publish-time">2020年12月11号</span>
-          </li>
-        </ul>
+              <span class="publish-time">2020年12月11号</span>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script>
+import Loading from "../components/loading";
 import axios from "../axios/request";
 export default {
   data() {
     return {
+      isLoading: true,
       articleList: [],
+      readCount: 0,
+      newArticleList: [],
     };
+  },
+  methods: {
+    read(e, index, count) {
+      console.log(e.target, index);
+      this.articleList.forEach((atr, i) => {
+        if (index === i) {
+         console.log(atr[i]);
+        }
+      });
+      console.log(count);
+    },
   },
   created() {
     axios()
       .get("/api/article?page=1&limit=20")
       .then((res) => {
+        // console.log(res.data);
         const datas = res.data.data;
         this.articleList = datas.datas;
+        if (this.articleList) {
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 2000);
+        }
         // console.log(this.articleList);
       });
+  },
+  updated() {
+    // const title = this.$refs.titleWidth;
+    // for (let i = 0; i < title.length; i++) {
+    //   const item = title[i];
+    //   const width = item.clientWidth;
+    //   console.log(item, width);
+    // }
+  },
+  components: {
+    Loading,
   },
 };
 </script>
@@ -107,7 +131,24 @@ export default {
             font-size: 15px;
           }
           p:nth-child(1) {
+            position: relative;
+            transition: all 0.6s;
             cursor: pointer;
+          }
+          p:nth-child(1)::before {
+            content: "";
+            position: absolute;
+            display: inline-block;
+            width: 0;
+            left: 50%;
+            bottom: -6px;
+            background: orange;
+            height: 2px;
+            transition: all 0.6s;
+          }
+          p:nth-child(1):hover::before {
+            left: 0;
+            width: 100%;
           }
           p:nth-child(2) {
             font-size: 14px;

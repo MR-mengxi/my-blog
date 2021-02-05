@@ -3,7 +3,12 @@
     <div>
       <div class="music-sing">
         <ul class="music-list">
-          <li class="music-item" v-for="music in musicList">
+          <li
+            class="music-item"
+            @click="musicTarget(index)"
+            v-for="(music, index) in musicList"
+            :key="music.id"
+          >
             {{ music.song }}
           </li>
         </ul>
@@ -22,7 +27,7 @@
       </div> -->
     </div>
     <div>
-      <mucplay :music="musicList" v-if="musicList.length > 0" />
+      <mucplay :music="lyric" v-if="musicList.length > 0" />
     </div>
     <div>
       <comment />
@@ -48,6 +53,13 @@ export default {
       .then((resp) => {
         this.musicList = resp.data.data;
       });
+  },
+
+  methods: {
+    musicTarget(index) {
+      const li = this.musicList[index];
+      this.lyric= li.lyric;
+    },
   },
 
   components: {
