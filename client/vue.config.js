@@ -9,5 +9,5 @@ module.exports = {
         },
         "open": true
     },
-    outputDir:path.resolve(__dirname,"../public")
+    outputDir: path.resolve(__dirname, "../public")
 }

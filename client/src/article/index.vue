@@ -4,7 +4,11 @@
     <template>
       <div class="title">将来要写的东西</div>
       <div class="container">
-        <div class="article-list" v-for="(article, index) in articleList">
+        <div
+          class="article-list"
+          v-for="(article, index) in articleList"
+          :key="index"
+        >
           <div class="article-time">时间格式</div>
           <ul class="article-info">
             <li>
@@ -15,7 +19,7 @@
               </div>
               <div class="item-r" ref="titleWidth">
                 <router-link
-                  @click.native="read($event, index, article.read)"
+                  @click.native="read(article.id)"
                   :to="{ name: 'ArticleInfo', params: { id: article.id } }"
                   tag="p"
                   >{{ article.title }}</router-link
@@ -34,6 +38,7 @@
 <script>
 import Loading from "../components/loading";
 import axios from "../axios/request";
+import { getRead } from "../axios/article";
 export default {
   data() {
     return {
@@ -44,14 +49,15 @@ export default {
     };
   },
   methods: {
-    read(e, index, count) {
-      console.log(e.target, index);
-      this.articleList.forEach((atr, i) => {
-        if (index === i) {
-         console.log(atr[i]);
+    async read(id) {
+      const len = this.articleList.length;
+      for (let i = 0; i < len; i++) {
+        if (this.articleList[i].id === id) {
+          let read = this.articleList[i].read;
+          read = read+=1;
+          const result = await getRead(id, { "read": read });
         }
-      });
-      console.log(count);
+      }
     },
   },
   created() {
@@ -66,7 +72,6 @@ export default {
             this.isLoading = false;
           }, 2000);
         }
-        // console.log(this.articleList);
       });
   },
   updated() {

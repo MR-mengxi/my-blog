@@ -59,3 +59,13 @@ exports.updateActicle = async function (id, obj) {
         }
     });
 }
+
+
+// 根据id设置文章的阅读
+exports.setRead = async function (id, obj) {
+    return result = await Article.update(obj, {
+        where: {
+            id
+        }
+    })
+}

@@ -38,9 +38,14 @@ router.delete("/:id", asyncHandler(async (req, res, next) => {
 );
 
 // 更新一个文章的接口
-router.put("/:id", asyncHandler(async (req, res) => {
-    return await articleServ.updateActicle(req.params.id, req.body);
-})
-);
+// router.put("/:id", asyncHandler(async (req, res) => {
+//     return await articleServ.updateActicle(req.params.id, req.body);
+// })
+// );
+
+// 设置文章的阅读
+router.post("/setRead/:id", asyncHandler(async (req, res) => {
+    return await articleServ.setRead(req.params.id, req.body);
+}))
 
 module.exports = router;
