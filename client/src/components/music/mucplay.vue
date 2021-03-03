@@ -16,7 +16,7 @@
       <audio
         ref="audio"
         @timeupdate="setCurrent"
-        src="../../assets/image/梦里花.mp3"
+        src="../../assets/image/等你归来.mp3"
       ></audio>
       <div class="play">
         <i
@@ -25,7 +25,7 @@
         ></i>
         <!-- <i class="iconfont icon-zantingtingzhi"></i> -->
       </div>
-      <div class="progress-bar">
+      <div class="progress-bar" ref="progressBar">
         <div class="bar-move" ref="barMove"></div>
         <!-- <div class="bar-circle" ref="barCircle"></div> -->
       </div>
@@ -44,8 +44,8 @@ export default {
       isPlay: false,
       lrcContainerHeight: 220,
       liHeight: 35,
-      musicTime: 253,
-      length: 462,
+      musicTime: 235,
+      length: 457,
     };
   },
   methods: {
@@ -107,9 +107,15 @@ export default {
         }
       }
 
-      let currentTime = this.$refs.audio.currentTime;
-      let currentLength = (currentTime / this.musicTime) * this.length;
-      this.$refs.barMove.style.width = currentLength + "px";
+      // let progressBarWidth = this.$refs.progressBar.clientWidth;
+      // let currentTime = this.$refs.audio.currentTime;
+      // console.log(currentTime);
+      // let currentLength = (currentTime / this.musicTime) * progressBarWidth;
+      // // console.log(currentLength);
+      // this.$refs.barMove.style.width = currentLength + "%";
+      let percent = (this.$refs.audio.currentTime / this.musicTime) * 100;
+      this.$refs.barMove.style.width = percent + "%";
+      console.log(percent);
     },
   },
 

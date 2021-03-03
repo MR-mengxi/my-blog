@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="svg">
-      <CircleSvg />
+      <!-- <CircleSvg /> -->
       <!-- <TriangleSvg /> -->
     </div>
     <!-- 页脚 -->

@@ -1,3 +1,4 @@
+const { timeEnd, timeStamp } = require("console");
 const Article = require("../models/Article");
 // const { Op } = require("sequelize");
 
@@ -23,13 +24,24 @@ exports.getArticle = async function (page = 1, limit = 5) {
 
     // 第二种查询方式
     const result = await Article.findAndCountAll({
-        attributes: ["id", "title", "content", "like", "read", "imgUrl"],
+        attributes: ["id", "title", "content", "like", "read", "imgUrl", "createdAt"],
         offset: (page - 1) * limit,
         limit: +limit,
     });
+    let newResult = JSON.parse(JSON.stringify(result.rows));
+    // console.log(newResult);
+    newResult.forEach(item => {
+        const time = item.createdAt;
+        let timeResult = time.split("-");
+        timeResult[0] = timeResult[0] + "年";
+        timeResult[1] = timeResult[1] + "月";
+        timeResult[2] = timeResult[2] + "日";
+        timeResult = timeResult.join("");
+        item.createdAt = timeResult;
+    });
     return {
         total: result.count,
-        datas: JSON.parse(JSON.stringify(result.rows))
+        datas: newResult
     }
 }
 
@@ -65,6 +77,15 @@ exports.updateActicle = async function (id, obj) {
 exports.setRead = async function (id, obj) {
     return result = await Article.update(obj, {
         where: {
+            id
+        }
+    })
+}
+
+// 根据id设置文章的喜欢
+exports.setLike = async function (id,obj){
+    return result = await Article.update(obj,{
+        where:{
             id
         }
     })

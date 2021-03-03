@@ -1,6 +1,6 @@
 <template>
   <div class="com-list">
-    <div class="com-title">{{ lists.total }}条留言</div>
+    <div class="com-title">{{ total }}条留言</div>
     <div class="com-item">
       <ul>
         <li v-for="item in lists" :key="item.id">
@@ -8,7 +8,7 @@
             <div class="tourists-info">
               <img src="../assets/image/6.jpg" alt="" />
               <div class="tourists-name">
-                <div class="tourists-title">也子</div>
+                <div class="tourists-title">{{item.userId}}</div>
                 <div class="tourists-com">
                   {{ item.comment }}
                 </div>
@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  props: ["lists"],
+  props: ["lists","total"],
 };
 </script>
 

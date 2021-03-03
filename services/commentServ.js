@@ -3,11 +3,11 @@ const Comment = require("../models/Comment");
 // 分页查询评论
 exports.getComment = async function (page = 1, limit = 10, ArticleId) {
     const result = await Comment.findAndCountAll({
-        attributes: ["id", "comment", "ArticleId"],
+        attributes: ["id", "userId", "comment", "ArticleId", "createdAt"],
         offset: (page - 1) * limit,
         limit: +limit,
         order: [
-            ["createdAt","DESC"]
+            ["createdAt", "DESC"]
         ],
         where: {
             ArticleId

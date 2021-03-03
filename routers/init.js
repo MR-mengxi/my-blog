@@ -4,8 +4,8 @@ const cors = require("cors");
 // const session = require("express-session");
 
 // 使用history模式，切换路由的时候才可以匹配到路由
-const history = require("connect-history-api-fallback");
-app.use(history());
+// const history = require("connect-history-api-fallback");
+// app.use(history());
 
 
 // app.use(session({

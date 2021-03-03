@@ -2,19 +2,19 @@
   <div class="comment">
     <div class="com-container">
       <div class="info">
-        <input type="text" v-model="username" name="昵称" placeholder="昵称" />
-        <!-- <el-input v-model="username" placeholder="昵称"></el-input> -->
-        <input type="email" v-model="password" name="邮箱" placeholder="邮箱" />
+        <!-- <input type="text" v-model="username" name="昵称" placeholder="昵称" /> -->
+        <el-input v-model="username" placeholder="昵称"></el-input>
+        <!-- <input type="email" v-model="password" name="邮箱" placeholder="邮箱" /> -->
       </div>
       <div ref="nicheng" class="nicheng">昵称不能为空</div>
       <div class="com-input">
         <textarea v-model="comment" placeholder="您想要表达什么"></textarea>
       </div>
       <div class="submit">
-        <button @click="submit(comment)">送达</button>
+        <button @click="submit">送达</button>
       </div>
     </div>
-    <Comment :lists="commentList" />
+    <Comment :lists="commentList" :total="total" />
   </div>
 </template>
 
@@ -26,6 +26,7 @@ export default {
     return {
       username: "",
       password: "",
+      total: "",
       comment: "",
       page: 1,
       limit: 10,
@@ -36,15 +37,16 @@ export default {
     this.getComData();
   },
   methods: {
-    async submit(comment) {
+    async submit() {
       // 验证昵称、邮箱是否正确
-      if (!this.username || !this.password) {
-        this.$refs.nicheng.style.opacity = "1";
-        this.$refs.nicheng.style.top = "90px";
-        return;
-      }
+      // if (!this.username || !this.password) {
+      //   this.$refs.nicheng.style.opacity = "1";
+      //   this.$refs.nicheng.style.top = "90px";
+      //   return;
+      // }
       const data = {
-        comment: comment,
+        userId: this.username,
+        comment: this.comment,
       };
       const result = await add(data);
       this.commentList.unshift(result.data);
@@ -58,9 +60,11 @@ export default {
       try {
         const data = { page: this.page, limit: this.limit };
         const result = await list(data);
-        const { datas } = result.data;
+        console.log(result.data);
+        const { datas, total } = result.data;
         setTimeout(() => {
           this.commentList.push(...datas);
+          this.total = total;
         }, 1000);
       } catch (e) {
         console.log(e);

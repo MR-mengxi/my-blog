@@ -5,6 +5,9 @@ const result = Mock.mock({
             "id|+1": 1,
             title: "@ctitle",
             content: "@cparagraph",
+            "like|1-200": 0,
+            "read|1-200": 0,
+            imgUrl: "https://dss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=567278569,1904899661&fm=58"
         }
     ]
 }).datas;

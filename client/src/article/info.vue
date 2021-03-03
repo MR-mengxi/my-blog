@@ -1,5 +1,6 @@
 <template>
   <div class="article-info">
+
     <section>
       <h1 class="title">{{ contentInfo.title }}</h1>
       <div class="info">
@@ -22,7 +23,7 @@ import axios from "../axios/request";
 import marked from "marked";
 import "highlight.js/styles/monokai-sublime.css";
 import Comment from "./articleWord/index";
-import { list } from "../axios/comment";
+import { list,add } from "../axios/comment";
 
 export default {
   data() {

@@ -21,7 +21,7 @@
               <div class="tourists-info">
                 <img src="../../assets/image/6.jpg" alt="" />
                 <div class="tourists-name">
-                  <div class="tourists-title">也子</div>
+                  <div class="tourists-title">{{item.userId}}</div>
                   <div class="tourists-com">
                     {{ item.comment }}
                   </div>
@@ -83,6 +83,7 @@ export default {
   methods: {
     async submit(comment) {
       const data = {
+
         comment: comment,
         ArticleId: this.id,
       };

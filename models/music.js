@@ -23,7 +23,7 @@ module.exports = sequelize.define("Music", {
         allowNull: false
     },
     duration: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     isLike: {

@@ -1,7 +1,7 @@
 const Mock = require("mockjs");
 const result = Mock.mock({
     "datas|15-20": [
-        {
+        {   userId:"@cname",
             comment: "@csentence",
             "ArticleId|1-10": 0
         }

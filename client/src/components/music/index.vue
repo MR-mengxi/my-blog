@@ -12,6 +12,7 @@
             {{ music.song }}
           </li>
         </ul>
+        
       </div>
       <!-- <div class="music-comment">
         <textarea
@@ -30,14 +31,13 @@
       <mucplay :music="lyric" v-if="musicList.length > 0" />
     </div>
     <div>
-      <comment />
+      <!-- <comment /> -->
     </div>
   </div>
 </template>
 
 <script>
 import mucplay from "./mucplay";
-import comment from "./musicComment";
 import request from "../../axios/request";
 export default {
   data() {
@@ -64,18 +64,17 @@ export default {
 
   components: {
     mucplay,
-    comment,
   },
 
-  // 自定义指令
-  directives: {
-    // 当被绑定的元素插入到DOM时执行
-    focus: {
-      inserted: function (el) {
-        el.focus();
-      },
-    },
-  },
+  // // 自定义指令
+  // directives: {
+  //   // 当被绑定的元素插入到DOM时执行
+  //   focus: {
+  //     inserted: function (el) {
+  //       el.focus();
+  //     },
+  //   },
+  // },
 };
 </script>
 

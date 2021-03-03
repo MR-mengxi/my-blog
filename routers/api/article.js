@@ -3,7 +3,7 @@ const router = express.Router();
 const articleServ = require("../../services/articleServ");
 const { asyncHandler } = require("../getSendResult");
 
-// 获取所有文章的接口
+// 分页获取文章的接口
 router.get("/", asyncHandler(async (req, res) => {
     const page = req.query.page || 1;
     const limit = req.query.limit || 5;
@@ -46,6 +46,11 @@ router.delete("/:id", asyncHandler(async (req, res, next) => {
 // 设置文章的阅读
 router.post("/setRead/:id", asyncHandler(async (req, res) => {
     return await articleServ.setRead(req.params.id, req.body);
+}))
+
+// 设置文章的喜欢
+router.post("/setLike/:id", asyncHandler(async (req, res) => {
+    return await articleServ.setLike(req.params.id, req.body);
 }))
 
 module.exports = router;

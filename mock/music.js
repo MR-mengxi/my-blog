@@ -1,5 +1,6 @@
-const musicList = [{
-    song: "海底", singer: "一支榴莲", album: "", duration: "253", isLike: true, lyric: `[00:05.70] 原唱：一支榴莲
+const musicList = [
+    {
+        song: "海底", singer: "一支榴莲", album: "", duration: 256, isLike: true, lyric: `[00:05.70] 原唱：一支榴莲
 [00:06.45] 作曲 : PSROSIE
 [00:07.52] 作词 : PSROSIE
 [00:09.02] 翻唱：酩九
@@ -50,7 +51,7 @@ const musicList = [{
 [04:01.39] 来不及来不及
 [04:05.77]你明明讨厌窒息
 [04:09.92]`}, {
-    song: "等你归来", singer: "程响", album: "等你归来", duration: "225", isLike: true, lyric: `[00:00.00]等你归来 - 程响
+        song: "等你归来", singer: "程响", album: "等你归来", duration: 235, isLike: true, lyric: `[00:00.00]等你归来 - 程响
         [00:01.49]词：宁缺
         [00:02.14]曲：宁缺
         [00:02.78]编曲：曲比阿且
@@ -102,7 +103,7 @@ const musicList = [{
         [03:30.38]渡过去将来
         [03:35.11]长对三生浮白 不畏不改
         [03:40.94]渡过去将来`}, {
-    song: "错位时空", singer: "艾辰", album: "错位时空", duration: "203", isLike: false, lyric: `[00:02.23]词：周仁
+        song: "错位时空", singer: "艾辰", album: "错位时空", duration: 203, isLike: false, lyric: `[00:02.23]词：周仁
         [00:03.19]曲：张博文
         [00:04.20]OP：腾煌星象
         [00:04.20]出品：网易飓风工作室
@@ -159,8 +160,8 @@ const musicList = [{
         [03:14.51]本歌曲来自〖飓风计划〗
         [03:15.51]10亿现金激励，千亿流量扶持！
         [03:16.51]业务联系：jf399@vip.163.com`},
-{
-    song: "梦里花", singer: "张韶涵", album: "梦里花", duration: "218", isLike: false, lyric: `[00:00.08]张韶涵 - 梦里花
+    {
+        song: "梦里花", singer: "张韶涵", album: "梦里花", duration: 218, isLike: false, lyric: `[00:00.08]张韶涵 - 梦里花
         [00:00.40]唯一纯白的茉莉花
         [00:06.97]盛开在琥珀色月牙
         [00:13.34]就算失去所有爱的力量
@@ -196,6 +197,8 @@ const musicList = [{
         [03:05.24]轻轻拭去满布全身的伤
         [03:12.12]我从不曾绝望`},
 ];
+
+// console.log(musicList);
 
 const Music = require("../models/music");
 Music.bulkCreate(musicList);

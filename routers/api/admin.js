@@ -27,8 +27,9 @@ router.post("/login", asyncHandler(async (req, res) => {
 );
 
 // 这个接口有问题
-// router.get("/whoami", asyncHandler(async (req, res) => {
-//     return await adminServ.getAdminById(req.userId)
-// }))
+router.get("/whoami", asyncHandler(async (req, res) => {
+    // console.log(req.userId);
+    return await adminServ.getAdminById(req.userId)
+}))
 
 module.exports = router;
