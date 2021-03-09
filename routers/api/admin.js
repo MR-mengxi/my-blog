@@ -9,14 +9,6 @@ router.post("/login", asyncHandler(async (req, res) => {
     const result = await adminServ.login(req.body.loginId, req.body.loginPwd);
     if (result) {
         let value = result.id;
-        // value = crypto.encrypt(value.toString());
-        // 登录成功
-        // res.cookie("token", value, {
-        //     path: "/",
-        //     domain: "localhost",
-        //     maxAge: 7 * 24 * 3600 * 1000 // 毫秒数
-        // });
-        // res.session.loginUser = result;
         jwt.publish(res, undefined, { id: value });
 
         // 其它终端设备

@@ -2,7 +2,7 @@
   <div class="mucplay">
     <div class="play-logo">
       <div class="img">
-        <img src="../../assets/image/song_1.jpg" alt="" />
+        <img src="@/assets/image/song_1.jpg" alt="" />
       </div>
     </div>
     <div class="music-lyric">
@@ -11,12 +11,13 @@
           {{ item.words }}
         </li>
       </ul>
+      <div class="nomusic" v-if="!lyric">选择你喜欢的音乐......</div>
     </div>
     <div class="music-progress">
       <audio
         ref="audio"
         @timeupdate="setCurrent"
-        src="../../assets/image/等你归来.mp3"
+        src="@/assets/image/等你归来.mp3"
       ></audio>
       <div class="play">
         <i
@@ -30,7 +31,7 @@
         <!-- <div class="bar-circle" ref="barCircle"></div> -->
       </div>
       <div class="progress-time">
-        <span>04:39</span>
+        <span>{{ newDuration }}</span>
       </div>
     </div>
   </div>
@@ -38,13 +39,18 @@
 
 <script>
 export default {
-  props: ["music"],
+  props: {
+    duration: [Number, String],
+    lyric: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       isPlay: false,
       lrcContainerHeight: 220,
       liHeight: 35,
-      musicTime: 235,
       length: 457,
     };
   },
@@ -107,22 +113,18 @@ export default {
         }
       }
 
-      // let progressBarWidth = this.$refs.progressBar.clientWidth;
-      // let currentTime = this.$refs.audio.currentTime;
-      // console.log(currentTime);
-      // let currentLength = (currentTime / this.musicTime) * progressBarWidth;
-      // // console.log(currentLength);
-      // this.$refs.barMove.style.width = currentLength + "%";
-      let percent = (this.$refs.audio.currentTime / this.musicTime) * 100;
+      let percent = (this.$refs.audio.currentTime / this.duration) * 100;
       this.$refs.barMove.style.width = percent + "%";
-      console.log(percent);
+      if (Math.floor(this.$refs.audio.currentTime) === this.duration) {
+        this.isPlay = false;
+      }
     },
   },
 
   computed: {
     lyricList() {
       // const lrc = this.music[1].lyric;
-      const lrc = this.music;
+      const lrc = this.lyric;
       let parts = lrc.split("\n");
       for (let i = 0; i < parts.length; i++) {
         const str = parts[i]; // 拿到这一行的字符串
@@ -145,6 +147,17 @@ export default {
           time,
         };
       }
+    },
+    newDuration() {
+      let m = Math.floor(this.duration / 60); //分钟
+      if (m < 10) {
+        m = "0" + m;
+      }
+      let s = this.duration - m * 60; //秒的部分
+      if (s < 10) {
+        s = "0" + s;
+      }
+      return m + ":" + s;
     },
   },
 };

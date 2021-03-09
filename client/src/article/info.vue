@@ -1,20 +1,21 @@
 <template>
   <div class="article-info">
-
-    <section>
-      <h1 class="title">{{ contentInfo.title }}</h1>
-      <div class="info">
-        <span>十一月 03, 2020</span>
-        <span> 阅读 {{ contentInfo.read }}</span>
-        <span>字数 1528</span>
-        <span>评论 28</span>
-        <span>喜欢 {{ contentInfo.like }}</span>
-      </div>
-      <article id="content markdown-body">
-        <div v-html="content" v-highlight></div>
-      </article>
-    </section>
-    <Comment :lists="commentList" :id="$route.params.id"/>
+    <Loading v-if="isLoading" />
+    <template v-else>
+      <section>
+        <h1 class="title">{{ contentInfo.title }}</h1>
+        <div class="info">
+          <span> 阅读 {{ contentInfo.read }}</span>
+          <span>评论 {{ number }}</span>
+          <span>喜欢 {{ contentInfo.like }}</span>
+        </div>
+        <article id="content markdown-body">
+          <div v-html="content" v-highlight></div>
+        </article>
+        <comment-input @comment="comment" />
+        <comment-list :lists="commentList" />
+      </section>
+    </template>
   </div>
 </template>
 
@@ -22,12 +23,15 @@
 import axios from "../axios/request";
 import marked from "marked";
 import "highlight.js/styles/monokai-sublime.css";
-import Comment from "./articleWord/index";
-import { list,add } from "../axios/comment";
+import { list, add } from "../axios/comment";
+import CommentInput from "@/components/commentInput";
+import CommentList from "@/components/commentList.vue";
+import Loading from "@/components/loading";
 
 export default {
   data() {
     return {
+      isLoading: false,
       contentInfo: {},
       content: "",
       page: 1,
@@ -50,6 +54,21 @@ export default {
       });
       this.content = marked(this.contentInfo.content);
     },
+
+    async comment(username, comment) {
+      const data = {
+        userId: username,
+        comment: comment,
+        ArticleId: this.$route.params.id,
+      };
+      const result = await add(data);
+      this.$message({
+        type: "success",
+        message: "留言成功~~",
+        offset: 60,
+      });
+      this.getComData();
+    },
     // 获取评论列表
     async getComData() {
       const data = {
@@ -57,80 +76,42 @@ export default {
         limit: this.limit,
         ArticleId: this.$route.params.id,
       };
-      // console.log(data);
       const result = await list(data);
-      // console.log(result);
       this.commentList = result.data;
-      // console.log(this.commentList)
-      // const { total } = result.data.data;
-      // setTimeout(() => {
-      //   this.commentList = result.data.data;
-      //   console.log(this.commentList);
-      //   // this.isLoading = false;
-      // }, 1000);
     },
   },
   async created() {
+    this.isLoading = true;
     const id = this.$route.params.id;
     // 从远程获取详情页的信息
     const result = await axios().get(`/api/article/${id}`);
     this.contentInfo = result.data.data;
+    if (this.contentInfo) {
+      setInterval(() => {
+        this.isLoading = false;
+      }, 2000);
+    }
     this.markdownRender();
   },
 
-  mounted(){
+  computed: {
+    number() {
+      return this.commentList.datas.length;
+    },
+  },
+
+  mounted() {
     this.getComData();
   },
   components: {
-    Comment,
+    CommentInput,
+    CommentList,
+    Loading,
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "github-markdown-css";
-
-.article-info {
-  width: 800px;
-  height: 300px;
-  margin: auto;
-  section {
-    .title {
-      font-size: 30px;
-      color: #333;
-      margin: 0;
-      padding: 130px 0 22px;
-    }
-    .info {
-      width: 100%;
-      span {
-        font-size: 13px;
-        color: #6a737d;
-        margin-right: 10px;
-      }
-    }
-    .markdown-body {
-      box-sizing: border-box;
-      min-width: 200px;
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 45px;
-    }
-
-    @media (max-width: 767px) {
-      .markdown-body {
-        padding: 15px;
-      }
-    }
-    .content {
-      padding: 100px 0;
-      font-size: 14px;
-      p {
-        line-height: 36px;
-        margin: 0 0 22px;
-        font-size: 16px;
-      }
-    }
-  }
-}
+@import "@/assets/css/article/info.scss";
 </style>

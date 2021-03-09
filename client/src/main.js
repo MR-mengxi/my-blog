@@ -2,8 +2,15 @@ import Vue from 'vue'
 import App from './App.vue'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import 'animate.css'
 import router from './router'
 import store from './store'
+
+// const article = require("./axios/article");
+// article.getArticleInfo(2).then(res=>console.log(res));
+
+// const music = require("./axios/getMusic");
+// music.getMusic().then(resp=>console.log(resp));
 
 
 // const comment = require("./axios/comment");

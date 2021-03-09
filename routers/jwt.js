@@ -16,29 +16,6 @@ exports.publish = (res, maxAge = 24 * 3600, info = {}) => {
     res.header("authorization", token);
 }
 
-// 验证jwt
-// exports.verify = (req) => {
-//     let token;
-//     // 尝试从cookie中获取
-//     token = req.cookies[cookieKey];
-//     if (!token) {
-//         // 尝试从headers中获取
-//         token = req.headers.authorization;
-//         if (!token) {
-//             // 没有token
-//             return null;
-//         }
-//         // authorization：bearer token
-//         token = token.split(" ");
-//         token = token.length === 1 ? token[0] : token[1];
-//     }
-//     try {
-//         const result = jwt.verify(token, secrect);
-//         return result;
-//     } catch {
-//         return null;
-//     }
-// }
 
 exports.verify = (req) => {
     let token = req.headers.authorization;

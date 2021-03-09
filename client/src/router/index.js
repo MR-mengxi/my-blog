@@ -1,11 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../login'
-import Music from '../components/music'
-import Article from '../article'
-import ArticleInfo from '../article/info'
-import Comment from '../comment'
 import store from "../store";
 
 Vue.use(VueRouter)
@@ -14,45 +8,44 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import("@/views/Home"),
   },
   {
     path: '/music',
     name: "Music",
-    component: Music,
-    // beforeEnter(to,from,next){
-    //   if (store.state.loginUser.data) {
-    //     //有用户
-    //     next();
-    //   } else {
-    //     next("/login");
-    //   }
-    // }
+    redirect:"/music/musiclist",
+    component: () => import("@/views/music"),
+    children: [
+      { path: 'musiclist', component: () => import("@/components/mymusic") },
+      { path: 'notes', component: () => import("@/components/notes") },
+      { path: 'collections', component: () => import("@/components/collections") },
+      { path: 'recycle', component: () => import("@/components/recycle") },
+    ]
   },
   {
     path: '/login',
     name: "Login",
-    component: Login
+    component: () => import("@/views/login")
   },
   {
     path: '/article',
     name: "Article",
-    component: Article
+    component: () => import("@/article")
   },
   {
     path: '/articleinfo/:id',
     name: 'ArticleInfo',
-    component: ArticleInfo
+    component: () => import("@/article/info")
   },
   {
     path: '/comment',
     name: 'Comment',
-    component: Comment
+    component: () => import("@/views/comment")
   },
   {
     path: '/scroll',
     name: 'Scroll',
-    component: () => import('../components/scrollBar')
+    component: () => import('@/components/scrollBar')
   }
 ]
 

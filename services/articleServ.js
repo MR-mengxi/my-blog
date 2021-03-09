@@ -1,8 +1,6 @@
-const { timeEnd, timeStamp } = require("console");
 const Article = require("../models/Article");
-// const { Op } = require("sequelize");
 
-// 添加一个技术文章
+// 添加一个文章
 exports.addArticle = async function (articleObj) {
     const ins = await Article.create(articleObj);
     return ins.toJSON();
@@ -10,26 +8,12 @@ exports.addArticle = async function (articleObj) {
 
 // 查询所有的文章
 exports.getArticle = async function (page = 1, limit = 5) {
-    // 第一种查询方式
-    // const result = await Article.findAll({
-    //     offset: (page - 1) * limit,
-    //     limit: +limit
-    // });
-    // const total = await Article.count();
-    // const datas = JSON.parse(JSON.stringify(result));
-    // return {
-    //     total,
-    //     datas
-    // }
-
-    // 第二种查询方式
     const result = await Article.findAndCountAll({
         attributes: ["id", "title", "content", "like", "read", "imgUrl", "createdAt"],
         offset: (page - 1) * limit,
         limit: +limit,
     });
     let newResult = JSON.parse(JSON.stringify(result.rows));
-    // console.log(newResult);
     newResult.forEach(item => {
         const time = item.createdAt;
         let timeResult = time.split("-");

@@ -1,17 +1,12 @@
 const express = require("express");
-const app = express(); // 创建一个express应用
+const app = express();
 const cors = require("cors");
-// const session = require("express-session");
 
 // 使用history模式，切换路由的时候才可以匹配到路由
 // const history = require("connect-history-api-fallback");
 // app.use(history());
 
 
-// app.use(session({
-//     secret: "yezi",
-//     name: "sessionid"
-// }));
 
 // 映射静态资源文件
 const path = require("path");
@@ -38,12 +33,8 @@ app.use(
         credentials: true,
     })
 );
-// 手写的cors中间件
-// app.use(require("./corsMiddleware"));
 
 // 加入cookie-parser中间件
-// 加入之后，会在req对象中注入cookies属性，用于获取所有请求传递过来的cookie
-// 加入之后，会在res对象中注入cookie方法，用于设置cookie
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
